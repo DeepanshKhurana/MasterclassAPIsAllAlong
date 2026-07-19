@@ -1,0 +1,19 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Secrets
+.env
+
+# macOS / RStudio local artifacts
+.DS_Store
+.Rhistory
+.Rproj.user/
+*.Rproj

@@ -1,0 +1,24 @@
+[project]
+name = "apis-all-along"
+version = "0.1.0"
+description = "APIs All Along: Analysis, Architecture, Automation — session bundle"
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "cricketstats>=0.1.8",
+    "fastapi==0.139.0",
+    "httpx==0.28.1",
+    "langchain==1.3.13",
+    "langchain-core==1.4.9",
+    "langchain-openai==1.3.5",
+    "pandas>=3.0.3",
+    "pydantic==2.13.4",
+    "pydantic-settings==2.14.2",
+    "requests>=2.34.2",
+    "uvicorn==0.51.0",
+]
+
+# NOTE: intentionally no [build-system] section. uv.lock records this project
+# as `source = { virtual = "." }`, i.e. a non-packaged workspace root. Adding a
+# build backend would change the recorded metadata and make
+# `uv sync --frozen` fail with a lockfile/manifest mismatch.

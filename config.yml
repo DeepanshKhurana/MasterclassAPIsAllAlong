@@ -1,0 +1,58 @@
+# config.yml — AthlyticZ session bundle
+# APIs All Along: Analysis, Architecture, Automation
+
+version: "1"
+
+meta:
+  name: apis-all-along
+  description: "Through this session we will analyse data but not through scripts. Instead, we will use a Plumber API in R, a Python API and another Python API as a wrapper with LLM support."
+  instructor: "Deepansh Khurana"
+  language: [r, python]
+  tags:
+    - r
+    - python
+    - apis
+    - fastapi
+    - plumber2
+    - langchain
+    - cricket
+
+system:
+  apt:
+    - libx11-dev
+    - libcurl4-openssl-dev
+    - libssl-dev
+    - libicu-dev
+    - libxml2-dev
+    - cmake
+    - make
+    - libuv1-dev
+    - zlib1g-dev
+    - pandoc
+    - libsodium-dev
+    - xz-utils
+    - libfreetype6-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libtiff-dev
+    - libwebp-dev
+    - libfontconfig1-dev
+    - libfribidi-dev
+    - libharfbuzz-dev
+  scripts:
+    - scripts/install_uv.sh
+
+r:
+  version: "4.5.0"
+  renv: true
+
+python:
+  version: "3.13"
+  manager: uv
+  sync: true
+
+env:
+  OPENROUTER_API_KEY: ""
+
+workspace:
+  dir: /home/jovyan/workspace

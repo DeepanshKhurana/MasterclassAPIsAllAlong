@@ -1,0 +1,32 @@
+services:
+  # R service, team stats from ESPNcricinfo
+  r-service:
+    build:
+      context: .
+      dockerfile: 01_r_service/Dockerfile
+    ports:
+      - "10000:10000"
+
+  # Python service, team stats computed from raw match data
+  python-data-service:
+    build:
+      context: .
+      dockerfile: 02_python_data_service/Dockerfile
+    ports:
+      - "10001:10001"
+
+  # Python service, combines both above and adds the LLM layer
+  python-orchestration:
+    build:
+      context: .
+      dockerfile: 03_python_orchestration/Dockerfile
+    ports:
+      - "10002:10002"
+    environment:
+      # Containers reach each other by service name, not localhost
+      R_SERVICE_URL: http://r-service:10000
+      PY_DATA_URL: http://python-data-service:10001
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+    depends_on:
+      - r-service
+      - python-data-service

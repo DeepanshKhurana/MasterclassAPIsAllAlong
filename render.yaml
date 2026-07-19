@@ -1,0 +1,60 @@
+# Service names are part of their public URL: https://<name>.onrender.com
+# That subdomain is shared across every Render account, not just yours, so if
+# multiple people deploy this file unchanged, only the first one gets these
+# exact URLs, everyone else collides and Render assigns different ones.
+#
+# Before deploying, replace YOURNAME below with something unique to you
+# (initials, username, anything short) everywhere it appears in this file.
+# Once that is consistent, the URLs still need no manual copy-pasting after
+# deploy, they are just scoped to your own name instead of a shared one.
+services:
+  - type: web
+    name: apis-all-along-r-service-YOURNAME
+    runtime: docker
+    dockerfilePath: ./01_r_service/Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: PORT
+        value: 10000
+
+  - type: web
+    name: apis-all-along-data-service-YOURNAME
+    runtime: docker
+    dockerfilePath: ./02_python_data_service/Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: PORT
+        value: 10001
+
+  - type: web
+    name: apis-all-along-orchestration-YOURNAME
+    runtime: docker
+    dockerfilePath: ./03_python_orchestration/Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: PORT
+        value: 10002
+      # A real secret, fill in through the Render dashboard, never in this file
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: R_SERVICE_URL
+        value: https://apis-all-along-r-service-YOURNAME.onrender.com
+      - key: PY_DATA_URL
+        value: https://apis-all-along-data-service-YOURNAME.onrender.com
+
+  - type: cron
+    name: apis-all-along-cron-YOURNAME
+    runtime: docker
+    dockerfilePath: ./04_cron/Dockerfile
+    dockerContext: .
+    schedule: "*/10 * * * *"
+    envVars:
+      - key: R_SERVICE_PUBLIC_URL
+        value: https://apis-all-along-r-service-YOURNAME.onrender.com
+      - key: PY_DATA_SERVICE_PUBLIC_URL
+        value: https://apis-all-along-data-service-YOURNAME.onrender.com
+      - key: PY_ORCHESTRATION_PUBLIC_URL
+        value: https://apis-all-along-orchestration-YOURNAME.onrender.com
