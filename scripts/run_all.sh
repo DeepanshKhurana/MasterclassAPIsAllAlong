@@ -22,9 +22,9 @@ uv run --directory 03_python_orchestration python -m app.main \
   > /tmp/apis-all-along-03-python-orchestration.log 2>&1 &
 echo $! >> "$PID_FILE"
 
-echo "01_r_service:            http://localhost:$R_PORT"
-echo "02_python_data_service:  http://localhost:$DATA_PORT"
-echo "03_python_orchestration: http://localhost:$ORCH_PORT"
+echo "01_r_service:            http://localhost:$R_PORT (docs: http://localhost:$R_PORT/__docs__/)"
+echo "02_python_data_service:  http://localhost:$DATA_PORT (docs: http://localhost:$DATA_PORT/docs)"
+echo "03_python_orchestration: http://localhost:$ORCH_PORT (docs: http://localhost:$ORCH_PORT/docs)"
 echo
 echo "Logs: /tmp/apis-all-along-*.log"
 echo "Stop: scripts/stop_all.sh"
