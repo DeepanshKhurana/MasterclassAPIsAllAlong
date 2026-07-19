@@ -3,13 +3,13 @@
 # multiple people deploy this file unchanged, only the first one gets these
 # exact URLs, everyone else collides and Render assigns different ones.
 #
-# Before deploying, replace YOURNAME below with something unique to you
+# Before deploying, replace DIMWIT below with something unique to you
 # (initials, username, anything short) everywhere it appears in this file.
 # Once that is consistent, the URLs still need no manual copy-pasting after
 # deploy, they are just scoped to your own name instead of a shared one.
 services:
   - type: web
-    name: apis-all-along-r-service-YOURNAME
+    name: apis-all-along-r-service-DIMWIT
     runtime: docker
     dockerfilePath: ./01_r_service/Dockerfile
     dockerContext: .
@@ -19,7 +19,7 @@ services:
         value: 10000
 
   - type: web
-    name: apis-all-along-data-service-YOURNAME
+    name: apis-all-along-data-service-DIMWIT
     runtime: docker
     dockerfilePath: ./02_python_data_service/Dockerfile
     dockerContext: .
@@ -29,7 +29,7 @@ services:
         value: 10001
 
   - type: web
-    name: apis-all-along-orchestration-YOURNAME
+    name: apis-all-along-orchestration-DIMWIT
     runtime: docker
     dockerfilePath: ./03_python_orchestration/Dockerfile
     dockerContext: .
@@ -41,20 +41,20 @@ services:
       - key: OPENROUTER_API_KEY
         sync: false
       - key: R_SERVICE_URL
-        value: https://apis-all-along-r-service-YOURNAME.onrender.com
+        value: https://apis-all-along-r-service-DIMWIT.onrender.com
       - key: PY_DATA_URL
-        value: https://apis-all-along-data-service-YOURNAME.onrender.com
+        value: https://apis-all-along-data-service-DIMWIT.onrender.com
 
   - type: cron
-    name: apis-all-along-cron-YOURNAME
+    name: apis-all-along-cron-DIMWIT
     runtime: docker
     dockerfilePath: ./04_cron/Dockerfile
     dockerContext: .
     schedule: "*/10 * * * *"
     envVars:
       - key: R_SERVICE_PUBLIC_URL
-        value: https://apis-all-along-r-service-YOURNAME.onrender.com
+        value: https://apis-all-along-r-service-DIMWIT.onrender.com
       - key: PY_DATA_SERVICE_PUBLIC_URL
-        value: https://apis-all-along-data-service-YOURNAME.onrender.com
+        value: https://apis-all-along-data-service-DIMWIT.onrender.com
       - key: PY_ORCHESTRATION_PUBLIC_URL
-        value: https://apis-all-along-orchestration-YOURNAME.onrender.com
+        value: https://apis-all-along-orchestration-DIMWIT.onrender.com
